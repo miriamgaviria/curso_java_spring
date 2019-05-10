@@ -111,6 +111,7 @@ public class Mostrar {
         }
      
         System.out.println("MODIFICO TODOS LOS INVITADOS DEL HASMAP");
+        System.out.println("A los clientes estandar no se les hace");
         for (Map.Entry<String, Cliente> parClaveValor : mapaClientes.entrySet()){
             Cliente cliente = parClaveValor.getValue();
             if (cliente instanceof ClienteInvitado){
@@ -120,10 +121,9 @@ public class Mostrar {
                 
             }else if (cliente instanceof ClienteVip){
                 ((ClienteVip) cliente).setBeneficio("Números rojos");
-            }else if (cliente instanceof Cliente){
-                System.out.println("Los clientes estandar no se hace nada");
-            } 
+            }
             cliente.mostrar();
+            
         }
         
         /*para crear un hasmap desde un arraylist
