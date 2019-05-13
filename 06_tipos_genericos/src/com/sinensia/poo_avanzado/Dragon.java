@@ -34,7 +34,7 @@ public class Dragon extends Mascota implements Depredador{
 
     @Override
     public void saludarPropietario() {
-        System.out.println(nombre + " le da los bueños días a " + propietario.getNombreCliente() + " calentando la casa");
+        System.out.println(nombre + " le da los bueños días a " + propietario.getNombre() + " calentando la casa");
     }
 
     @Override

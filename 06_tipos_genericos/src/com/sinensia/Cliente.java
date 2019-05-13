@@ -1,40 +1,30 @@
 
 package com.sinensia;
 
-public class Cliente {
-    protected long idCliente;
-    protected String nombreCliente;
+import com.sinensia.dao.GenericoDAO;
+
+public class Cliente extends Entidad{
+    
+    protected String nombre;
     protected String email;
     private boolean activo;
     // private String password;
     // private char genero;
     // String date; fecha, tipo date
 
-    public Cliente(long idCliente, String nombreCliente, String email){ //throws Exception{
-        this.idCliente = idCliente;
-        /*if (nombreCliente == null || nombreCliente == ""){
-            // throw new Exception ("Nombre de cliente inválido");
-            System.err.println("Nombre de cliente inválido");
-        }*/
-        this.nombreCliente = nombreCliente;
+    public Cliente(long id, String nombre, String email){ //throws Exception{
+        super(id);
+        this.nombre = nombre;
         this.email = email;
         activo = true;
     }
     
-    public long getIdCliente (){
-        return this.idCliente;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setIdCliente(long idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    public String getNombreCliente() {
-        return nombreCliente;
-    }
-
-    public void setNombreCliente(String nombreCliente) {
-        this.nombreCliente = nombreCliente;
+    public void setNombre(String nombreCliente) {
+        this.nombre = nombreCliente;
     }
 
     public String getEmail() {
@@ -55,14 +45,14 @@ public class Cliente {
     
     public void mostrar (){
         System.out.println("Método mostrar de cliente");
-        System.out.println("- Cliente " + nombreCliente);
-        System.out.println("- Id " + this.idCliente);
+        System.out.println("- Cliente " + nombre);
+        System.out.println("- Id " + this.id);
         System.out.println("- Email " + this.getEmail());
     }
     
     @Override
     public String toString() {
         //return super.toString(); //To change body of generated methods, choose Tools | Templates.
-        return "Cliente [" + idCliente + ", " + nombreCliente + ", " + email + "]";
+        return "Cliente [" + id + ", " + nombre + ", " + email + "]";
     }
 }

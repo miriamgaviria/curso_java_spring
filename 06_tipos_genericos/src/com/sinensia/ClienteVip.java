@@ -20,8 +20,8 @@ public class ClienteVip extends Cliente {
     @Override
     public void mostrar (){
         System.out.println("Método mostrar de clienteVip");
-        System.out.println("- Cliente " + nombreCliente);
-        System.out.println("- Id " + this.idCliente);
+        System.out.println("- Cliente " + nombre);
+        System.out.println("- Id " + this.id);
         System.out.println("- Email " + this.getEmail());
         System.out.println("- Beneficio " + beneficio);
     }

@@ -12,7 +12,7 @@ public abstract class Mascota extends Animal {
     }
     
     public void pedirComida(){
-        System.out.println(propietario.getNombreCliente() + " ALIMÉNTAME!!!");
+        System.out.println(propietario.getNombre() + " ALIMÉNTAME!!!");
     }
     
     public abstract void saludarPropietario();

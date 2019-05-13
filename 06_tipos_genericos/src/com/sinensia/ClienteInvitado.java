@@ -36,8 +36,8 @@ public class ClienteInvitado extends Cliente {
     @Override
     public void mostrar (){
         System.out.println("Método mostrar de clienteInvitado");
-        System.out.println("- Cliente " + nombreCliente);
-        System.out.println("- Id " + this.idCliente);
+        System.out.println("- Cliente " + nombre);
+        System.out.println("- Id " + this.id);
         System.out.println("- Email " + this.getEmail());
         System.out.println("- Duración máxima " + this.duracionMax);
     }

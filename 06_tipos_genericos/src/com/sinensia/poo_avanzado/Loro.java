@@ -32,7 +32,7 @@ public class Loro extends Mascota{
 
     @Override
     public void saludarPropietario() {
-        System.out.println(nombre + " pía emocionado a " + propietario.getNombreCliente() + ".");
+        System.out.println(nombre + " pía emocionado a " + propietario.getNombre() + ".");
     }
     
 }
