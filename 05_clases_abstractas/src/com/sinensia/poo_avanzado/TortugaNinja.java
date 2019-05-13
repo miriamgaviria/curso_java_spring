@@ -24,12 +24,7 @@ public class TortugaNinja extends Mascota implements Mamifero{
     
     @Override
     public void volar() {
-        /*try {
-            System.out.println(nombre + " Tiene vértigo a las alturas");
-        }catch (UnsupportedOperationException e){
-            System.out.println(" Error" + e);
-        }*/
-        
+        //Lanzamps unas excepción que recogemos cuando llamamos al método volar en probando animales
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -74,6 +69,5 @@ public class TortugaNinja extends Mascota implements Mamifero{
             return nombre; //To change body of generated methods, choose Tools | Templates.
         }*/ 
     }
-    
-     
+      
 }

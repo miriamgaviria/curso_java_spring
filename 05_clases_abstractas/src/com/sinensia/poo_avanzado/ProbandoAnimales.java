@@ -18,7 +18,16 @@ public class ProbandoAnimales {
         
         michelangelo.mover();
         michelangelo.comer();
-        //michelangelo.volar();
+        try{//probamos el código
+            michelangelo.volar();
+        }catch (UnsupportedOperationException e){//recoge la excepción específica
+            System.err.println(e.getMessage());
+        }catch(Exception e){//por si acaso, recoge una excepción general
+            System.err.println(e.getMessage());
+        }finally{//opciónal, este código siempre lo ejecuta
+            System.err.println("Siempre se ejecuta esta línea");
+        }
+        
         michelangelo.setPropietario(angel);
         michelangelo.saludarPropietario();
         michelangelo.pedirComida();
