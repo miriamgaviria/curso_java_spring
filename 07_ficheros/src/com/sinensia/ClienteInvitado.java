@@ -9,6 +9,13 @@ public class ClienteInvitado extends Cliente {
         super(idCliente, nombreCliente, email);
         this.duracionMax = duracionMax;
     }
+
+    public ClienteInvitado(long id, String nombre, String email, boolean activo, int duracionMax) {
+        super(id, nombre, email, activo);
+        this.duracionMax = duracionMax;
+    }
+    
+    
     
     public ClienteInvitado(long idCliente, String nombreCliente, String email) {
         super(idCliente, nombreCliente, email);
@@ -40,5 +47,11 @@ public class ClienteInvitado extends Cliente {
         System.out.println("- Id " + this.id);
         System.out.println("- Email " + this.getEmail());
         System.out.println("- Duración máxima " + this.duracionMax);
+    }
+    
+    @Override
+    public String toString() {
+        //return super.toString(); //To change body of generated methods, choose Tools | Templates.
+        return "Cliente invitado [" + id + ", " + nombre + ", " + email + ", "+ activo+" , "+ duracionMax +"]";
     }
 }

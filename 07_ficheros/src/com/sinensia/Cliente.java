@@ -7,7 +7,7 @@ public class Cliente extends Entidad implements Comparable<Cliente> {
     
     protected String nombre;
     protected String email;
-    private boolean activo;
+    protected boolean activo;
     // private String password;
     // private char genero;
     // String date; fecha, tipo date
@@ -18,6 +18,15 @@ public class Cliente extends Entidad implements Comparable<Cliente> {
         this.email = email;
         activo = true;
     }
+
+    public Cliente(long id,String nombre, String email, boolean activo) {
+        super(id);
+        this.nombre = nombre;
+        this.email = email;
+        this.activo = activo;
+    }
+    
+    
     
     public String getNombre() {
         return nombre;
@@ -53,7 +62,7 @@ public class Cliente extends Entidad implements Comparable<Cliente> {
     @Override
     public String toString() {
         //return super.toString(); //To change body of generated methods, choose Tools | Templates.
-        return "Cliente [" + id + ", " + nombre + ", " + email + "]";
+        return "Cliente [" + id + ", " + nombre + ", " + email + ", "+ activo+"]";
     }
 
     @Override
