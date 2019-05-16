@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Otros campos</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Otros campo FORM</h1>
+        <form action="#" method="post" enctype="text/plain">
+            <input type="button" value="Botón JS" onclick="alert('Ventana JS')"/>
+            <input type="button" value="Botón JS vinculado" onclick="mostrar('Otra ventana de JS')"/>
+            <br/><br/>
+            <label for="fichero">Fichero: </label>
+            <input type="file" id="fichero" name="fichero" />
+            <br/><br/>
+            <label for="fecha">Fecha: </label>
+            <input type="datetime" id="fecha" name="fecha" />
+            <br/><br/>
+            <label for="password">Contraseña: </label>
+            <input type="password" id="password" name="password" />
+            <br/><br/>
+            <label for="password-encriptada">Campo no visible </label>
+            <input type="hidden" id="password-encriptada" name="password-encriptada" value="abcde"/>
+            <br/><br/>
+            
+            <h3>Otros inputs</h3>
+            <label for="url">Url </label>
+            <input type="url" id="url" name="url" />
+            
+            <label for="rango">Rango </label>
+            <input type="range" id="rango" name="rango" min="-50" max="50"/>
+            
+            <label for="telefono">Telefono </label>
+            <input type="tel" id="telefono" name="telefono" />
+            
+            <label for="Búsqueda">Busca: </label>
+            <input type="search" id="busqueda" name="busqueda"/>
+            
+            <br/><br/>
+            <h3>Tipos de input de selección</h3>
+            Casillas de verificación<input type="checkbox" checked="checked" value="Saludos"/> Chequeado o no
+            <br/><br/>Tipo de cliente<br/><br/>
+            <input type="radio" checked="checked" id="tipoCliente" name="tipoCliente" value="ClienteNormal"/>Cliente Normal
+            <input type="radio" id="tipoClienteInvitado" name="tipoCliente" value="ClienteInvitado"/>Cliente Invitado
+            <input type="radio" id="tipoClienteVip" name="tipoCliente" value="ClienteVip"/>Cliente Invitado
+            <br/><br/>
+            Frecuencia de viajes<br/><select id="frecuencia" name="frecuencia" multiple="">
+                <option value="1">Una vez al día</option>
+                <option value="2">Varias veces al día</option>
+                <option value="3">Varias veces a la semana</option>
+                <option value="4">Varias veces al mes</option>
+            </select>
+            
+            <br/><br/>Comentarios o mensaje: <br/>
+            <textarea id="comentarios" cols="30" rows="6" name="comentarios" placeholder="Comenta tus cositas"></textarea>
+            
+            <br/><br/>
+            <input type="submit" id="enviar" name="enivar" value="Enviar formulario"/>
+            
+            <br/><br/>
+            <table border="2">
+                <caption>Lista de vainas</caption>
+                <tr>
+                    <td>Vaina: </td>
+                    <td>Quitapelos </td>
+                    <td>15€ </td>
+                </tr>                
+                <tr>
+                    <td>Vaina: </td>
+                    <td>Coche estropeado </td>
+                    <td>200€ </td>
+                </tr>
+            </table>
+        </form>
+        
+        <img alt="Texto alternativo IMG" src="images/literature-3033196_960_720.jpg"/>
+        <br/>
+        
+        <a href="index.html">Vuelve al index</a>
+        
+        <script src="js/04_mascampos.js"></script>
+    </body>
+</html>
