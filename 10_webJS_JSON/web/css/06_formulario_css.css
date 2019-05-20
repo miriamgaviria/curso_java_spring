@@ -1,0 +1,22 @@
+/*
+el * se utiliza para quitar márgentes
+*/
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+/* Las etiquetas pueden ser de bloque, ocupa lo que ocupa el texto, o en línea, 
+ocupando toda la línea,e inline-block, que saca todo en una línea pero en bloques
+*/
+
+form{
+    background-color: #AAFFAA;
+    
+}
+label{
+    width: 100px;
+    display: inline-block;
+}
+

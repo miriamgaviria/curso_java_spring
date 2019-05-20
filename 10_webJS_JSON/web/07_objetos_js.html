@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <input id="btn" type="button"  value="Probar"/>
+        <!--vamos a añadir interactividad al botón -->
+        <div id="divDatos">TODO write content</div>
+        <script>
+            function mostrarDatos() {
+                var divDatos = document.getElementById("divDatos");
+                divDatos.innerHTML = "Datos de objetos";
+                //3 FORMAS DE CREAR OBJETOS EN JS
+                //1)Usando New Object y añadiendo los campos
+                var objCliente = new Object();
+                //añadimos variables miembro (propiedades)
+                objCliente.nombre = "Juan";
+                objCliente.edad = 27;
+                //otra manera de añadirle propiedades
+                objCliente["activo"] = true; //es lo mismo que .activo. Los objetos en JS son
+                //una especie de HashMap; por eso podemos usar el [   ]
+                divDatos.innerHTML += "<br/>" + "Nombre: " + objCliente["nombre"] +
+                        " Activo: " + objCliente.activo + "<br/>";
+                //en JS TODO SON OBJETOS, hasta las funciones
+                //asignamos una función anónima a una función toString
+                objCliente.toString = function () {
+                    return " Nombre: " + objCliente["nombre"] +
+                            " Edad: " + objCliente.edad;
+                };
+                
+                //1)otra forma de definir una función
+                var funATexto = new Function("param", "return this.nombre + '-' + param");
+                //recibe el parametro y devuelve el segundo
+                funATexto.propiedadSinSentido = "No tengo razon para vivir";
+                objCliente.aTexto = funATexto;
+
+                divDatos.innerHTML += objCliente.toString() + "<br/>";
+
+                divDatos.innerHTML += objCliente.aTexto("valor1") + "<br/>";//ignora la segunda variable
+
+                //2) Con algo parecido a un constrcutor: function con estructura de constructor.  
+                // Otra forma de crear objetos en JavaScript. Con una función, similar a la de new de Java
+                var Cliente = function (nom, edad) {
+                    //new Function
+                    this.nombre = nom;
+                    this.edad = edad;
+                    this.enTexto = function () {//método similar a toString (que también lo tiene)
+                        return  "Cliente :" + this.nombre + " edad ="
+                                + this.edad; //metodo de cliente, su multiplica el método por cada método
+                    };
+                };
+                //Método común como en Java, método de clase
+                Cliente.prototype.enTexto = function (){
+                    return  "Cliente :" + this.nombre + " edad = "  + this.edad; 
+                }
+                
+                // Método estático como en Java
+                Cliente.enTexto = function(cli){
+                    return  "Cliente :" + this.nombre + " edad = "  + this.edad;
+                }
+                
+                var miCliente = new Cliente("Ana", 30 + "<br/>"); //se ejerce el constructor cuando hacemos NEW
+                divDatos.innerHTML += miCliente.enTexto();
+
+                //3) Notación JSON
+                var otroCliente = {
+                    "nombre": "Luis",
+                    "edad": 37,
+                    "activo": true,
+                    "enTexto": function () {
+                        return "Cli " + this.nombre
+                    }
+                };
+                divDatos.innerHTML += otroCliente.enTexto() + "> "
+                        + otroCliente.edad;
+
+                for (var clave in otroCliente) {
+                    divDatos.innerHTML += "<br/>" + otroCliente[clave];
+                    //también devuelve el último elemento porque function tiene toString
+                    //y convierte el return en texto
+                }
+            }
+            var btn = document.getElementById("btn");
+            //btn.onclick = mostrarDatos; 
+            btn.addEventListener("click", mostrarDatos);
+            
+            class ClaseCliente {// Azúcar sintáctico para lo mismo que antes de los objetos
+                constructor (nombre, edad, act){
+                    this.nombre = nombre;
+                    this.edad = edad;
+                    this.activo = act;
+                }
+                toString(){// igual si se hubiera puesto enTexto() 
+                    return "Cli " + this.nombre;
+                }
+            }
+        </script>
+        
+        <a href="index.html">Vuelve al index</a>
+    </body>
+</html>
