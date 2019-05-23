@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.eclipse.persistence.jpa.jpql.tools.ResultQuery;
+//import org.eclipse.persistence.jpa.jpql.tools.ResultQuery;
 
 public class MySQLClienteDAO implements InterfazDAO<Cliente> {
 
