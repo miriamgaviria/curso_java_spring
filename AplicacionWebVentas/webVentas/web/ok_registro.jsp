@@ -1,3 +1,4 @@
+<%@page import="com.sinensia.modelo.logica.ServicioClientes"%>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -7,17 +8,21 @@ and open the template in the editor.
 <%@page import="com.sinensia.modelo.*" %>
 <html>
     <head>
-        <title>Registro ok</title>
+        <title>Registro Ok</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body> 
-        <% (new ServicioCliente().obtenerUno(""))
-        <% for (int i = 0; i<10; i++){//<% % para abrir y cerrar java
-            %>        
+    <body>
+        <%= (new ServicioClientes()).obtenerUno("prueba@email.com").getNombre() %>
         
-        <div>Registro ok</div>
-        <%
-        }%>
+       <% for (int i = 0; i < 10; i++) 
+       {
+           %>
+           
+        <div>Registro Ok</div>
+        
+           <%
+       } %>
+        
     </body>
 </html>
