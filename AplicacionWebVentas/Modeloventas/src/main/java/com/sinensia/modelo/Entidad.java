@@ -3,30 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.sinensia.modelo;
 
-/**
- *
- * @author Admin - Miriam
- */
 public class Entidad {
+
     protected Integer id;
 
     public Entidad() {
     }
-    
-    public Entidad (Integer id){
+    public Entidad(Integer id) {
         this.id = id;
     }
-        
-    public Integer getId(){
+    public Integer getId() {
         return id;
     }
     public void setId(Integer id) {
         this.id = id;
     }
 }
-    
-        
-    

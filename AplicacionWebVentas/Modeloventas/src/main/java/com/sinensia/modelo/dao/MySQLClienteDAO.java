@@ -4,14 +4,13 @@ import com.sinensia.modelo.Cliente;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.ResultSet;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.eclipse.persistence.jpa.jpql.tools.ResultQuery;
 
 public class MySQLClienteDAO implements InterfazDAO<Cliente> {
 
@@ -81,22 +80,21 @@ public class MySQLClienteDAO implements InterfazDAO<Cliente> {
     public Cliente obtenerUno(String email) {
         try (Connection conex = DriverManager.getConnection(
                 Constantes.CONEXION, Constantes.USUARIO, Constantes.PASSWORD)) {
-            String sqlQuery
-                    = "SELECT id, nombre, edad, activo, password FROM cliente WHERE email = ?" ;
-            PreparedStatement sentencia = conex.prepareStatement(sqlQuery);
-            sentencia.setString (1, email);
-            ResultSet res = sentencia.executeQuery();
+            String sqlQuery = "SELECT id, nombre, edad, password, activo "
+                    + " FROM cliente WHERE email = ?";
+            PreparedStatement stmt = conex.prepareStatement(sqlQuery);
+            stmt.setString(1, email); // Primer ? interrogante
+            ResultSet res = stmt.executeQuery();
             Cliente cli = null;
-            if(res.next()){
-                int id = res.getInt("id");
-                String nombre = res.getString("nombre");
-                String password = res.getString("password");
-                short edad = res.getShort("edad");
-                short activo = res.getShort("activo");
-                cli = new Cliente(id, nombre, email, edad, password, activo);                
+            if (res.next()) {
+                int id = res.getInt(1);
+                String nombre = res.getString(2);
+                short edad = res.getShort(3);
+                String password = res.getString(4);
+                short activo = res.getShort(5);
+                cli = new Cliente(id, nombre, email, edad, activo, password);                
             }
             return cli;
-            
         } catch (SQLException ex) {
             Logger.getLogger(MySQLClienteDAO.class.getName())
                     .log(Level.SEVERE, "Error SQL", ex);
@@ -108,10 +106,9 @@ public class MySQLClienteDAO implements InterfazDAO<Cliente> {
     public List<Cliente> obtenerTodos() {
         try (Connection conex = DriverManager.getConnection(
                 Constantes.CONEXION, Constantes.USUARIO, Constantes.PASSWORD)) {
-            String sqlQuery
-                    = "SELECT id, nombre, edad, email, activo, password FROM cliente ";
+            String sqlQuery = "SELECT id, nombre, edad, email, password, activo  FROM cliente";
             PreparedStatement sentencia = conex.prepareStatement(sqlQuery);
-            List<Cliente> clientes = new ArrayList<>();
+            ArrayList<Cliente> clientes = new ArrayList<>();
             ResultSet res = sentencia.executeQuery();
             while (res.next()) {
                 int id = res.getInt("id");
@@ -120,7 +117,7 @@ public class MySQLClienteDAO implements InterfazDAO<Cliente> {
                 String password = res.getString("password");
                 short edad = res.getShort("edad");
                 short activo = res.getShort("activo");
-                Cliente cli = new Cliente(id, nombre, email, edad, password, activo);
+                Cliente cli = new Cliente(id, nombre, email, edad, activo, password);
                 clientes.add(cli);
             }
             return clientes;
@@ -140,10 +137,10 @@ public class MySQLClienteDAO implements InterfazDAO<Cliente> {
     public void eliminar(Integer id) {
         try (Connection conex = DriverManager.getConnection(
                 Constantes.CONEXION, Constantes.USUARIO, Constantes.PASSWORD)) {
-            String sqlQuery
-                    = "DELETE FROM cliente WHERE id = ?" ;
+            String sqlQuery = "DELETE FROM cliente WHERE id = ?;";
             PreparedStatement sentencia = conex.prepareStatement(sqlQuery);
-            sentencia.setInt (1, id);
+            sentencia.setInt(1, id); // Primer ? interrogante
+            sentencia.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(MySQLClienteDAO.class.getName())
                     .log(Level.SEVERE, "Error SQL", ex);
@@ -151,16 +148,7 @@ public class MySQLClienteDAO implements InterfazDAO<Cliente> {
     }
 
     public void eliminar(String email) {
-        try (Connection conex = DriverManager.getConnection(
-                Constantes.CONEXION, Constantes.USUARIO, Constantes.PASSWORD)) {
-            String sqlQuery
-                    = "DELETE FROM cliente WHERE email = ?" ;
-            PreparedStatement sentencia = conex.prepareStatement(sqlQuery);
-            sentencia.setString (1, email);
-        } catch (SQLException ex) {
-            Logger.getLogger(MySQLClienteDAO.class.getName())
-                    .log(Level.SEVERE, "Error SQL", ex);
-        }
+        eliminar(obtenerUno(email).getId());
     }
 
     @Override
@@ -168,7 +156,7 @@ public class MySQLClienteDAO implements InterfazDAO<Cliente> {
         try (Connection conex = DriverManager.getConnection(
                 Constantes.CONEXION, Constantes.USUARIO, Constantes.PASSWORD)) {
             String sqlQuery
-                    = "UPDATE cliente SET nombre= ?, email=?, password=?, edad=?, activo=? WHERE id=? ) ";
+                    = "UPDATE cliente SET nombre=?, email = ?,password=?, edad=?, activo=? WHERE id = ?;";
             PreparedStatement sentencia = conex.prepareStatement(sqlQuery);
             sentencia.setString(1, cliente.getNombre()); // Primer ? interrogante
             sentencia.setString(2, cliente.getEmail()); // Segundo ? interrogante

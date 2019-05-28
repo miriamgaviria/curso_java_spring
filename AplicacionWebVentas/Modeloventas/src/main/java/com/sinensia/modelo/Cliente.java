@@ -9,21 +9,22 @@ package com.sinensia.modelo;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- *
- * @author Admin - Miriam
- */
-
 public class Cliente extends Entidad implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    
     private String nombre;
+    
     private String email;
+    
     private short edad;
-    private String password;
+    
     private short activo;
+    
+    private String password;
+    
     private List<Compra> compraList;
-
+    
     public Cliente() {
     }
 
@@ -31,15 +32,14 @@ public class Cliente extends Entidad implements Serializable {
         super(id);
     }
 
-    public Cliente(Integer id, String nombre, String email, short edad, String password, short activo) {
-        super (id);
+    public Cliente(Integer id, String nombre, String email, short edad, short activo, String password) {
+        super(id);
         this.nombre = nombre;
         this.email = email;
         this.edad = edad;
-        this.password = password;
         this.activo = activo;
+        this.password = password;
     }
-
     public String getNombre() {
         return nombre;
     }
@@ -64,20 +64,20 @@ public class Cliente extends Entidad implements Serializable {
         this.edad = edad;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public short getActivo() {
         return activo;
     }
 
     public void setActivo(short activo) {
         this.activo = activo;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Compra> getCompraList() {
@@ -102,7 +102,6 @@ public class Cliente extends Entidad implements Serializable {
             return false;
         }
         Cliente other = (Cliente) object;
-        
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -112,12 +111,10 @@ public class Cliente extends Entidad implements Serializable {
     @Override
     public String toString() {
         return "Cliente[ id=" + id + ", "
-                + nombre + ", " 
-                + email + ", " 
-                + password + ", " 
-                + edad + ", " 
-                + activo + "]" ;
-                
+                + nombre + ", "
+                + email + ", "
+                + password + ", "
+                + edad + ", "
+                + activo + "]";
     }
-
 }

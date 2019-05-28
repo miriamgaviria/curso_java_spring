@@ -7,81 +7,79 @@ package com.sinensia.test;
 
 import com.sinensia.modelo.Cliente;
 import com.sinensia.modelo.logica.ServicioClientes;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import com.sinensia.modelo.logica.*;
-
 
 /**
  *
  * @author Admin
  */
 public class ClienteServicioTest {
-    private static ServicioClientes serviCli ;
+    private static ServicioClientes servCli;
     
-   
     @BeforeClass
     public static void setUpClass() {
-        serviCli = new ServicioClientes();
+        servCli = new ServicioClientes();
     }
-    
     @Test
-    public void clienteOk(){
-        // assert = afirmar / asegúrate
-        assertNotNull(serviCli.insertar("Uno", "email@ok.com", "ok12", "30", "on"));
-        //serviCli.insertar("Dos", "email2@ok.com", "ok12", "30", "on");
-        assertEquals(serviCli.obtenerUno("email@ok.com").getNombre(), "Uno");
-        //assertEquals(serviCli.obtenerUno("email2@ok.com").getNombre(), "Dos");
-        serviCli.eliminar("email@ok.com");
-        //serviCli.eliminar("email2@ok.com");
-        //assertNull(serviCli.obtenerUno("email@ok.com"));
-        //assertNull(serviCli.obtenerUno("email2@ok.com"));
+    public void clienteOk_1() {
+        // assert = afirmar/asegurar
+        assertNotNull(servCli.insertar("Ok", "emailooo@ok.com", "ok12", "30", "on"));
+        assertEquals( servCli.obtenerUno("emailooo@ok.com").getNombre(), "Ok");
+        servCli.eliminar("emailooo@ok.com");
+        assertNull(servCli.obtenerUno("emailooo@ok.com"));
     }
-    
-    
     @Test
-    public void clienteMal_Nombre(){
-        serviCli.insertar("", "email@ok1.com", "ok12", "30", "on");
-        assertNull(serviCli.obtenerUno("email@ok1.com"));
+    public void clienteOk_2() {
+        servCli.insertar("Cliente Ok", "email_1@ok.com", "ok12", "30", "on");
+        servCli.insertar("Cliente Ok", "email_2@ok.com", "ok12", "25", "on");
+        assertEquals( servCli.obtenerUno("email_1@ok.com").getEdad(), 30);
+        assertTrue( servCli.obtenerUno("email_2@ok.com").getActivo() == 1);
+        servCli.eliminar("email_1@ok.com");
+        servCli.eliminar("email_2@ok.com");
+        assertNull(servCli.obtenerUno("email_1@ok.com"));
+        assertNull(servCli.obtenerUno("email_2@ok.com"));
     }
-    
+     @Test
+    public void clienteMal_Nombre() {
+        servCli.insertar("", "clienteMal_1@ok.com", "ok12", "30", "on");
+         assertNull(servCli.obtenerUno("clienteMal_1@ok.com"));
+    }
     @Test
-    public void clienteMal_OtrosCampos(){
-        serviCli.insertar("Nombre bien", "", "ok12", "30", "on");// mail null
-        serviCli.insertar("Bien", "email@oka.com", "", "30", "on");//passwd null
-        serviCli.insertar("Ok", "email@okb.com", "ok12", "0", "on");//edad null
-        serviCli.insertar("Ok", "email@okc.com", "ok12", "NoNum", "on");//edad no numérico
-        assertNull(serviCli.obtenerUno(""));
-        assertNull(serviCli.obtenerUno("email@oka.com"));
-        assertNull(serviCli.obtenerUno("email@okb.com"));
-        assertNull(serviCli.obtenerUno("email@okc.com"));
+    public void clienteMal_OtrosCampos() {
+        servCli.insertar("Nombre bien", "", "ok12", "30", "on");
+        assertNull(servCli.obtenerUno(""));
+        servCli.insertar("Bien", "clien@ok.com", "", "30", "on");
+        servCli.insertar("Ok", "client_2@ok.com", "ok12", "0", "on");
+        servCli.insertar("Ok", "client_3@ok.com", "ok12", "NoNUM", "on");
+        assertNull(servCli.obtenerUno("clien@ok.com"));
+        assertNull(servCli.obtenerUno("client_2@ok.com"));
+        assertNull(servCli.obtenerUno("client_3@ok.com"));
     }
-    
     @Test
-    public void modificarOK(){
-        assertNotNull(serviCli.insertar("Ana", "ana@ok.com", "ok12", "30", "on"));
-        /* esto es igual a las siguientes 4 líneas de código
-        assertNotNull(serviCli.modificar(serviCli.obtenerUno("ana@ok.com").getId(), "Ana2", "ana@ok.com", "ok12", "30", "on"));
-        */
-        Cliente cliente = serviCli.obtenerUno("ana@ok.com");
-        serviCli.modificar(cliente.getId(),"Ana2", "ana@ok.com", "ok12", "30", "on");
-        cliente = serviCli.obtenerUno("ana@ok.com");
-        assertEquals(cliente.getNombre(), "Ana");
-        serviCli.eliminar("ana@ok.com");
-        //assertNull(serviCli.obtenerUno("ana@ok.com"));
+    public void clienteModificacion_OK() {
+        assertNotNull(
+                servCli.insertar("Cliente Ok", "email_1@ok.com", "ok12", "30", "on"));
+        Cliente cliente = servCli.obtenerUno("email_1@ok.com");
+        servCli.modificar(cliente.getId(), "Cli", "mmm@ok.com", "NuevaPSWD", "30", "on");
+        cliente = servCli.obtenerUno("mmm@ok.com");
+        assertEquals(cliente.getPassword(), "NuevaPSWD");
+        servCli.eliminar("mmm@ok.com");
+        assertNull(servCli.obtenerUno("mmm@ok.com"));
     }
-    
-    @Test
-    public void modificarMal(){
-        assertNotNull(serviCli.insertar("Ana", "ana@ok.com", "ok12", "30", "on"));
-        assertNull(serviCli.modificar(serviCli.obtenerUno("ana@ok.com").getId(), "Ana2", "ana@ok.com", "", "30", "on")); 
-        /* La línea anterior es igual a esto
-        Cliente cliente = serviCli.obtenerUno("ana@ok.com");
-        assertEquals(cliente.getNombre(), "Ana2");
-        serviCli.elimiinar ("ana@ok.com");
-        assertNull(serviCli.obtenerUno("ana@ok.com"));
-       */
+    public void clienteModificacion_Mal() {
+        assertNotNull(
+                servCli.insertar("Cliente Ok", "email_1@ok.com", "ok12", "30", "on"));
+        Cliente cliente = servCli.obtenerUno("email_1@ok.com");
+        assertNull(
+            servCli.modificar(cliente.getId(), "Cli", "mmm@ok.com", "NuevaPSWD", "hh", "on"));
+        cliente = servCli.obtenerUno("email_1@ok.com");
+        assertEquals(cliente.getEdad(), 30);
+        servCli.eliminar("email_1@ok.com");
+        assertNull(servCli.obtenerUno("email_1@ok.com"));
     }
-
 }

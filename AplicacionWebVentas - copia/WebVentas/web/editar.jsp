@@ -44,6 +44,7 @@
             <p>Id: <span id="id_cli"></span></p>
             <p>Nombre: <span id="nombre_cli"></span></p>
             <p>Email: <span id="email_cli"></span></p>
+            <p>Password: <span id="password_cli"></span></p>
             <p>Edad: <span id="edad_cli"></span></p>
             <p>Activo: <span id="activo_cli"></span></p>
         </div>

@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Admin - Miriam
+ * @author Admin - German
  */
 @Entity
 @Table(name = "compra")
@@ -51,7 +51,6 @@ public class Compra implements Serializable {
     @JoinColumn(name = "producto_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Producto productoId;
-
     public Compra() {
     }
 
@@ -129,5 +128,4 @@ public class Compra implements Serializable {
     public String toString() {
         return "com.sinensia.modelo.Compra[ id=" + id + " ]";
     }
-
 }

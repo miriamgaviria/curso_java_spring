@@ -8,17 +8,16 @@ package com.sinensia.modelo.dao;
 import java.util.List;
 
 /**
- * Interfax Data Access Object para toda la app
+ * Interfaz Data Access Object para toda la app
  * @author Admin
  * @param <T> Entidad para interfaz DAO
  */
-
-// interfaz con las cuatro operaciones crud
-public interface InterfazDAO<T>{
-    T insertar (T valor);
-    T obtenerUno(Integer idCliente);
+public interface InterfazDAO<T> {
+    
+    T insertar(T valor);
+    T obtenerUno(Integer id);
     List<T> obtenerTodos();
-    void eliminar (T valor);
-    void eliminar (Integer idCliente);
-    T modificar (T nuevoValor);
+    void eliminar(T valor);
+    void eliminar(Integer id);
+    T modificar(/*long id,*/ T nuevoValor);
 }

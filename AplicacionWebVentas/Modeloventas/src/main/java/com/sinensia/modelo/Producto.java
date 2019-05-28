@@ -22,7 +22,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Admin - Miriam
+ * @author Admin - German
  */
 @Entity
 @Table(name = "producto")
@@ -40,14 +40,13 @@ public class Producto implements Serializable {
     @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
+    @Column(name = "cantidad")
+    private int cantidad;
+    @Basic(optional = false)
     @Column(name = "precio")
     private long precio;
-    @Basic(optional = false)
-    @Column(name = "cantidad")
-    private String cantidad;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productoId")
     private List<Compra> compraList;
-
     public Producto() {
     }
 
@@ -55,11 +54,11 @@ public class Producto implements Serializable {
         this.id = id;
     }
 
-    public Producto(Integer id, String nombre, long precio, String cantidad) {
+    public Producto(Integer id, String nombre, int cantidad, long precio) {
         this.id = id;
         this.nombre = nombre;
-        this.precio = precio;
         this.cantidad = cantidad;
+        this.precio = precio;
     }
 
     public Integer getId() {
@@ -78,20 +77,20 @@ public class Producto implements Serializable {
         this.nombre = nombre;
     }
 
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
     public long getPrecio() {
         return precio;
     }
 
     public void setPrecio(long precio) {
         this.precio = precio;
-    }
-
-    public String getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(String cantidad) {
-        this.cantidad = cantidad;
     }
 
     public List<Compra> getCompraList() {
@@ -126,5 +125,4 @@ public class Producto implements Serializable {
     public String toString() {
         return "com.sinensia.modelo.Producto[ id=" + id + " ]";
     }
-
 }

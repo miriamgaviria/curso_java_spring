@@ -29,9 +29,21 @@ var alPulsarModificar = function () {
             console.log(" Id recibido: " + objRest.id + "\n Nombre recibido: " + objRest.nombre + 
                     "\n Email recibido: " + objRest.email  );
             
+            var divInfo = document.getElementById("div_info");
+            divInfo.style = "disyplay: block";
             document.getElementById("id_cli").innerHTML = objRest.id;
             document.getElementById("nombre_cli").innerHTML = objRest.nombre;
             document.getElementById("email_cli").innerHTML = objRest.email;
+            document.getElementById("edad_cli").innerHTML = objRest.edad;
+            document.getElementById("password_cli").innerHTML = objRest.password;
+            document.getElementById("activo_cli").innerHTML = objRest.activo;
+            //Condicional ternario. 1.equals(objRest.activo) ? "on" : "off";
+            /*if (objRest.activo == 1){
+                objRest.activo = "on";
+            }else{
+                objRest.activo = "off";
+            }
+            document.getElementById("activo_cli").innerHTML = objRest.activo;*/
         } /*else {
             alert("Aun NO hemos recibido nada!");
         }*/
@@ -50,7 +62,7 @@ var alPulsarModificar = function () {
           "nombre=" + encodeURIComponent(document.getElementById("nombre").value)
           + "&email=" + encodeURIComponent(document.getElementById("email").value)
           + "&password_encrip=" + encodeURIComponent(document.getElementById("password_encrip").value)
-          + "&activo=" + encodeURIComponent(document.getElementById("activo").value)
+          + "&activo=" + encodeURIComponent(activo)
           + "&edad=" + encodeURIComponent(document.getElementById("edad").value);
     
     alert(cadenaEnvio);

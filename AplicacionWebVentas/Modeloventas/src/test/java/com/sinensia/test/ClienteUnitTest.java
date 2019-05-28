@@ -38,35 +38,27 @@ public class ClienteUnitTest {
     @After
     public void tearDown() {
     }
-    
-    @Test
-    public void probarJUnit(){
-        assertEquals(10, 10);
-        //assertEquals("texto", "tExto");
-        assertNotEquals("texto", "tExto");
-    }
-    
-    @Test
-    public void probarClienteDAO(){
-        ClienteDAO daoCli = new ClienteDAO();
-        daoCli.insertar(new Cliente(1, "Prueba", "pru@pru.com", (short) 20, "Pru123", (short) 1));
-        daoCli.insertar(new Cliente(2, "Prueba2", "pru@pru.com", (short) 22, "Pru123", (short) 1));
-        assertEquals(daoCli.obtenerTodos().size(), 2);//test para ver si el tamaño de la lista es de dos
-        
-        Cliente cli = daoCli.obtenerUno(2);
-        assertTrue(cli.getEmail().equals("pru@pru.com"));
-        assertSame(cli, cli);
-        
-        
-        
-    }
-    
-    
-    
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
-    // @Test
-    // public void hello() {}
+    @Test
+    public void probarJUnit() {
+        assertEquals(10, 10);
+        assertEquals("Texto", "Texto");
+        // assertEquals("Texto", "tExto"); // ERROR Test
+        assertNotEquals("Texto", "tExto");
+    }
+    @Test
+    public void probarClienteDAO() {
+        ClienteDAO daoCli = new ClienteDAO();
+        daoCli.insertar(new Cliente(1, "Pru", "pru@pru",
+              (short) 20, (short) 1, "Pru123"));
+        daoCli.insertar(new Cliente(2, "Pru2", "pru2@pru",
+              (short) 22, (short) 0, "Pru123"));
+        
+        assertEquals("2", daoCli.obtenerTodos().size());   
+        Cliente  cli = daoCli.obtenerUno(2);
+        assertTrue(cli.getEmail().equals("pru2@pru"));        
+    }
 }

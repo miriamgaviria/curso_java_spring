@@ -6,7 +6,7 @@
         <a href="registro.jsp">Nuevo cliente</a>
         <a href="login.jsp">Login</a>
     </c:if> 
-        
+    <a href="borrar.jsp">Borrar</a>    
     <a href="editar.jsp">Editar AJAX + Rest</a>
 
     <c:if test="${login == 'ok'}">
@@ -14,6 +14,7 @@
         <a href="listado_sql.jsp">Listado clientes JSTL - SQL</a>
         <a href="clientes.do">Listado clientes JSTL Y JavaBeans</a>
         <a href="editar.jsp">Editar AJAX + Rest</a>
+        
 
         </br></br>
 

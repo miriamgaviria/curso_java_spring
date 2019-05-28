@@ -14,73 +14,68 @@ import java.util.Map;
 
 /**
  *
- * @author Admin - Miriam
- * @param <T> El tipo hereda de Entidad
+ * @author Admin - German
+ * @param <T>  El tipo hereda de Entidad
  */
-public class GenericoDAO<T extends Entidad> implements InterfazDAO<T>{
-    HashMap <Integer, T> mapa;
+public class GenericoDAO<T extends Entidad> 
+        implements InterfazDAO<T>{
     
-    public GenericoDAO(){
+    HashMap<Integer, T> mapa;
+
+    public GenericoDAO() {
         mapa = new HashMap<>();
     }
-    
     static int contadorIds;
     @Override
-    public T insertar (T cli){
+    public T insertar(T cli) {
         contadorIds++;
-        if (cli == null){
-            System.err.println("No se pueden añadir números");
-        }else{
+        if (cli == null) {
+            System.err.println("No se pueden añadir nulos");
+        } else {
             mapa.put(contadorIds, cli);
             cli.setId(contadorIds);
             return cli;
         }
         return null;
     }
-    
+
     @Override
-    public T obtenerUno(Integer id){
-        if (mapa.containsKey(id)){
+    public T obtenerUno(Integer id) {
+        if (mapa.containsKey(id)) {
             return mapa.get(id);
         }
-        System.err.println("Clave/id no encontrado " + id);
+        System.err.println("Clave/ID no encontrado " + id);
         return null;
     }
-    
+
     @Override
-    public List<T> obtenerTodos() {
-        System.out.println("LEER TODOS LOS ELEMENTOS");
-        ArrayList <T> listaLectura = new ArrayList<>();
-        for (Map.Entry<Integer, T> parClaveValor : mapa.entrySet()){
-            T cliente = parClaveValor.getValue();// las dos líneas equivalen a listaLectura.add(parClaveValor.getValue);
-            cliente.getId();
-            listaLectura.add(cliente);
-        }
-        return listaLectura;
-    }
-    
-    @Override
-    public void eliminar(T cliente) {//nombre de parámetro T corresponde con el de valor de interfaz, es sólo nombre variable de método
+    public void eliminar(T cliente) {
         mapa.remove(cliente.getId());
     }
 
     @Override
-    public void eliminar(Integer idT) {
-        mapa.remove(idT);
+    public void eliminar(Integer id ) {
+        mapa.remove(id);
     }
- 
+
     @Override
-    public T modificar(T cliente){
-        mapa.replace(cliente.getId(), cliente);
-        return cliente;
+    public List<T> obtenerTodos() {
+        ArrayList<T> lista;
+        lista = new ArrayList<>();
+        for (Map.Entry<Integer, T> ent : mapa.entrySet()) {
+            lista.add(ent.getValue());
+        }
+        return lista;   // Cast implicito
     }
-    
-    /*public void modificar(T cliente) {
-        T clienteModificado = mapa.get(cliente.getId());
-        clienteModificado.setNombre(cliente.getNombre());
-        clienteModificado.setEmail(cliente.getEmail());
-        System.out.println("MODIFICADO");
-        System.out.println(clienteModificado.getNombre());
-        System.out.println(clienteModificado.getEmail());
-    }*/
+    @Override
+    public T modificar(T nuevoValor) {
+        
+        mapa.replace(nuevoValor.getId(), nuevoValor);
+        return nuevoValor;
+        
+        /*T cli = mapa.get(nuevoValor.getId()) ;        
+        cli.setActivo(nuevoValor.isActivo());
+        cli.setEmail(nuevoValor.getEmail());
+        cli.setNombre(nuevoValor.getNombre());*/
+    }
 }

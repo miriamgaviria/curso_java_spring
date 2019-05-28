@@ -12,6 +12,10 @@
         <servlet-name>ClienteControladorREST</servlet-name>
         <servlet-class>com.sinensia.controladores.ClienteControladorREST</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControladorEliminar</servlet-name>
+        <servlet-class>com.sinensia.controladores.ControladorEliminar</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControladorClientes</servlet-name>
         <url-pattern>/clientes.do</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>ClienteControladorREST</servlet-name>
         <url-pattern>/clientes2.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorEliminar</servlet-name>
+        <url-pattern>/eliminar.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
