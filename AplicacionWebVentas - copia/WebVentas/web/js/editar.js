@@ -1,4 +1,4 @@
-var alPulsarModificar = function (){
+var alPulsarModificar = function () {
     antesDeEnviar();
     var nombre = document.getElementById("nombre").value;
     var email = document.getElementById("email").value;
@@ -6,39 +6,57 @@ var alPulsarModificar = function (){
     var edad = document.getElementById("edad").value;
     var activo = document.getElementById("activo").checked;
     activo = activo ? "on" : "off";
-    
     var cliente = {
-        "nombre":nombre,
-        "email":email,
-        "edad":edad,
-        "activo":activo
+        "nombre": nombre,
+        email: email,
+        'edad': edad
     };
-    cliente.password=password; // otra manera de poner atributos al objeto en JS
-    cliente["activo"]= activo; // otra manera de poner atributos al objeto en JS
+    cliente.password = password;
+    cliente["activo"] = activo;
     
-    var clienteJSON = JSON.stringify(cliente);
-    alert("Enviando..." + clienteJSON);
-    peticionHTTP.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    var clienteJSON = JSON.stringify(cliente);// Convertir obj en JSON
+    alert("Enviando...\n" + clienteJSON);    
     
-    var peticionHTTP = new XMLHttpRequest();
-    peticionHTTP.onreadystatechange=function (){
-        alert("Ha cambiado algo, nivel: " + peticionHTTP.readyState);
-        if (this.readyState === 4 && this.status === 200){
-            alert("Hemos recibido la respuesta" + this.responseText);
-        }else {
-            alert("Aun NO hemos recibido nada");
-        }
-    }
-    // definimos la peticion
-    peticionHTTP.open("PUT", "http://localhost:8084/WebVentas/clientes2.do", true);
-    // mandamos la peticion
-    var formDATA = formDATA(document.getElementById("form1"));
-    var cadenaEnvio = "nombre=" + encodeURIComponent(document.getElementById("nombre").value) 
-                        + "email=" + encodeURIComponent(document.getElementById("email").value) 
-                        + "password_encrip=" + encodeURIComponent(document.getElementById("password_encrip").value) 
-                        + "activo=" + encodeURIComponent(document.getElementById("activo").value) 
-                        + "edad=" + encodeURIComponent(document.getElementById("edad").value);
-alert(cadenaEnvio);                
+    // ActiveX para IE 7. Creamos el objecto XMLHttpRequest para la función Ajax
+    var peticionHTTP = new XMLHttpRequest(); // Objeto AJAX
+    // Onreadystatechange: por cada cambio de estado que tenga el servidor, hace esta función: if...
+    peticionHTTP.onreadystatechange = function () {
+        // alert("Ha cambiado de estado" + petipeticionHTTP.readyState);
+        if (this.readyState === 4 && this.status === 200) {
+            alert("Hemos recibido algo!" + this.responseText);//this.responseText = peticionHTTP.responseText   
+            var jsonResp = this.responseText;
+            var objRest = JSON.parse(jsonResp);
+            console.log(" Id recibido: " + objRest.id + "\n Nombre recibido: " + objRest.nombre + 
+                    "\n Email recibido: " + objRest.email  );
+            
+            document.getElementById("id_cli").innerHTML = objRest.id;
+            document.getElementById("nombre_cli").innerHTML = objRest.nombre;
+            document.getElementById("email_cli").innerHTML = objRest.email;
+        } /*else {
+            alert("Aun NO hemos recibido nada!");
+        }*/
+    };
+    // Definimos la petición
+    peticionHTTP.open("POST", "clientes2.do", true);
+    
+    // le decimos en la cabecera que lo que se pasa es un formulario
+    // codifica la url del formulario porque algunos caracteres no pueden ir en la url
+    // porque lo estamos pasando con JavaScript. HTML lo codifica automáticamente
+    peticionHTTP.setRequestHeader("Content-type" , "application/x-www-form-urlencoded");
+    // lanzamos la petición
+    var form1 = document.getElementById("form1");
+    var formData = new FormData(form1);
+    var cadenaEnvio = 
+          "nombre=" + encodeURIComponent(document.getElementById("nombre").value)
+          + "&email=" + encodeURIComponent(document.getElementById("email").value)
+          + "&password_encrip=" + encodeURIComponent(document.getElementById("password_encrip").value)
+          + "&activo=" + encodeURIComponent(document.getElementById("activo").value)
+          + "&edad=" + encodeURIComponent(document.getElementById("edad").value);
+    
+    alert(cadenaEnvio);
+    // envío la petición con los parámetros de open y la cadena
+    peticionHTTP.send(cadenaEnvio);// al enviar la petición cambia varias veces el estado y se va a onreadystatechange
 };
-
-document.getElementById("btn_modificar").addEventListener("click", alPulsarModificar);
+// document.getElementById("btn_modificar").addEventListener("click", alPulsarModificar );
+// Esta línea es equivalente a la anterior
+document.getElementById("btn_modificar").onclick = alPulsarModificar;

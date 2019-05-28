@@ -18,7 +18,7 @@
         </br></br>
 
         <form method="GET" action="clientes.do">
-            <input type="text" id="nombre" name="nombre"/>
+            <input type="text" id="nombre_busq" name="nombre_busq" />
             <input type="submit" value="Buscar">
         </form>
 
